@@ -1,0 +1,20 @@
+---
+version: '2'
+
+services:
+  db:
+    image: postgres:9.5
+    env_file:
+      - ".env.development"
+
+  web:
+    build: .
+    command: bundle exec hanami server --host 0.0.0.0
+    volumes:
+      - ".:/usr/src"
+    ports:
+      - "3000:2300"
+    depends_on:
+      - db
+    env_file:
+      - ".env.development"

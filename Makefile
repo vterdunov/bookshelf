@@ -1,14 +1,23 @@
 SHELL:=/bin/bash
 
 build:
-	docker build -t bookshelf .
+	docker-compose -f docker-compose.dev.yml up --build
 
 run:
-	docker run -it --rm -p 3000:2300 -v $(shell pwd):/usr/src bookshelf
+	docker-compose -f docker-compose.dev.yml up
 
 shell:
-	docker run -it --rm -p 3000:2300 -v $(shell pwd):/usr/src bookshelf /bin/sh
+	docker-compose -f docker-compose.dev.yml exec web /bin/sh
+	sudo chown -R $(shell whoami):$(shell whoami) ./
+
+shell-db:
+	docker-compose -f docker-compose.dev.yml exec db psql --user=postgres
+
 
 test:
-	clear
-	docker run -it --rm -p 3000:2300 -v $(shell pwd):/usr/src bookshelf /bin/sh -c 'bundle exec rspec'
+	@clear
+	docker-compose -f docker-compose.dev.yml exec web /bin/sh -c 'HANAMI_ENV=test bundle exec rspec'
+
+test-no-tty:
+	@clear
+	@docker-compose -f docker-compose.dev.yml exec web /bin/sh -c 'HANAMI_ENV=test bundle exec rspec'
