@@ -12,6 +12,7 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
   - docker-compose -f docker-compose.dev.yml build
+  - docker-compose -f docker-compose.dev.yml up -d
   - docker-compose -f docker-compose.dev.yml exec web /bin/sh -c 'HANAMI_ENV=test hanami db prepare'
 
 script:
