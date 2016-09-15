@@ -13,7 +13,7 @@ describe Web::Views::Books::Index do
 
   describe 'when there are no books' do
     it 'shows a placeholder message' do
-      expect(view.books).to have_selector('<p>', text: 'There are no books yet.')
+      expect(rendered).to have_text 'There are no books yet.'
     end
   end
 
@@ -23,13 +23,13 @@ describe Web::Views::Books::Index do
     let(:exposures) { Hash[books: [book1, book2]] }
 
     it 'lists them all' do
-      rendered.scan(/class="book"/).count.must_equal 2
-      rendered.must_include('Refactoring')
-      rendered.must_include('Domain Driven Design')
+      expect(rendered).to have_css 'div.book', count: 2
+      expect(rendered).to have_text 'Refactoring'
+      expect(rendered).to have_text 'Domain Driven Design'
     end
 
     it 'hides the placeholder message' do
-      rendered.wont_include('<p class="placeholder">There are no books yet.</p>')
+      expect(rendered).not_to have_text 'There are no books yet.'
     end
   end
 end

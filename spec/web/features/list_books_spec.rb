@@ -11,8 +11,6 @@ describe 'List books' do
   it 'show a book element for each book' do
     visit '/books'
 
-    within '#books' do
-      expect(page).to have_css('.book', count: 2)
-    end
+    expect(page).to have_css('.book', count: 2)
   end
 end
