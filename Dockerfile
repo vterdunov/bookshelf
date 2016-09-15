@@ -18,7 +18,7 @@ RUN apk add --update $PACKAGES && \
 
 WORKDIR $APP_HOME
 COPY Gemfile $APP_HOME
-# COPY Gemfile.lock $APP_HOME
+COPY Gemfile.lock $APP_HOME
 RUN bundle install --jobs=4
 
 COPY . $APP_HOME
