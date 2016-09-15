@@ -1,2 +1,3 @@
 /public/assets*
 /tmp
+db/bookshelf_development.sqlite3

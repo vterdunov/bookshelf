@@ -37,8 +37,8 @@ Hanami::Model.configure do
       entity     Book
       repository BookRepository
 
-      attribute :id,   Integer
-      attribute :title, String
+      attribute :id,     Integer
+      attribute :title,  String
       attribute :author, String
     end
   end

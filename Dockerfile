@@ -10,6 +10,7 @@ ARG PACKAGES=' \
     libxslt-dev \
     libffi-dev \
     postgresql-dev \
+    sqlite \
     sqlite-dev'
 
 RUN apk add --update $PACKAGES && \
